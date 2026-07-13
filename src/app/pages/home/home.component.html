@@ -1,0 +1,160 @@
+<!-- Hero / Boas-vindas -->
+<section class="home-hero">
+  <div class="container">
+    <div class="hero-content text-center fade-in">
+      <div class="hero-icon-wrapper">
+        <i class="bi bi-egg-fried"></i>
+      </div>
+      <h1 class="hero-title">
+        Olá, <span class="hero-username">{{ username || 'Cozinheiro(a)' }}</span>!
+      </h1>
+      <p class="hero-subtitle">
+        Encontre a alternativa perfeita para cada ingrediente e transforme suas receitas em pratos incrivelmente saudáveis.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/recipes" class="btn btn-hero-primary">
+          <i class="bi bi-search me-2"></i>Buscar Substitutos Saudáveis
+        </a>
+        <a routerLink="/alternative-recipes" class="btn btn-hero-secondary">
+          <i class="bi bi-book-half me-2"></i>Ver Receitas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Carrossel de Imagens -->
+<section class="carousel-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-11 col-xl-10">
+        <div id="recipeCarousel" class="carousel slide carousel-fade shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel" data-bs-interval="5000">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#recipeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#recipeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#recipeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="carousel1.png" class="d-block w-100 carousel-img" alt="Preparação de comida saudável com vegetais frescos">
+              <div class="carousel-caption-custom">
+                <h3>Alimentação Consciente</h3>
+                <p>Mude pequenos hábitos no dia a dia trocando ingredientes comuns por alternativas altamente nutritivas.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="carousel2.png" class="d-block w-100 carousel-img" alt="Ingredientes naturais e saudáveis na mesa">
+              <div class="carousel-caption-custom">
+                <h3>Substitutos Perfeitos</h3>
+                <p>Farinhas integrais, adoçantes naturais e gorduras do bem com proporções exatas para suas receitas.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="carousel3.png" class="d-block w-100 carousel-img" alt="Família feliz comendo uma refeição saudável">
+              <div class="carousel-caption-custom">
+                <h3>Saúde para Todos</h3>
+                <p>Cozinhe pratos deliciosos e inclusivos que todos em sua família podem saborear sem restrições.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#recipeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#recipeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cartões de Benefícios -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="section-header text-center fade-in">
+      <h2 class="section-title">Por que usar Substitutos Saudáveis?</h2>
+      <p class="section-subtitle">Descubra como pequenas trocas podem transformar sua saúde e suas receitas.</p>
+    </div>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4 fade-in">
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="bi bi-heart-pulse"></i>
+          </div>
+          <h3>Mais Saúde</h3>
+          <p>
+            Reduza o açúcar refinado, o glúten ou gorduras saturadas sem perder a textura e o sabor das suas receitas favoritas.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in">
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="bi bi-wallet2"></i>
+          </div>
+          <h3>Economia Imediata</h3>
+          <p>
+            Utilize ingredientes simples e acessíveis que você já tem na sua despensa, economizando em idas ao mercado.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in">
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="bi bi-lightning-charge"></i>
+          </div>
+          <h3>Facilidade e Praticidade</h3>
+          <p>
+            Acesse uma base de dados limpa, com substituições rápidas, proporções prontas de uso e suporte a acessibilidade digital.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats / Números Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3 fade-in">
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Receitas Alternativas</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 fade-in">
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Categorias</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 fade-in">
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Substitutos</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 fade-in">
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Acessível</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Final -->
+<section class="cta-section">
+  <div class="container text-center fade-in">
+    <h2 class="cta-title">Pronto para Cozinhar?</h2>
+    <p class="cta-subtitle">Explore nossas substituições e prepare pratos saudáveis agora mesmo.</p>
+    <a routerLink="/recipes" class="btn btn-hero-primary btn-lg">
+      <i class="bi bi-arrow-right-circle me-2"></i>Começar Agora
+    </a>
+  </div>
+</section>

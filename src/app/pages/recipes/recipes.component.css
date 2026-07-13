@@ -1,0 +1,89 @@
+.ingredient-item {
+  cursor: pointer;
+  border: 2px solid transparent !important;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ingredient-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary-color), #66bb6a);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ingredient-item:hover {
+  transform: translateX(6px);
+  border-color: rgba(46, 125, 50, 0.15) !important;
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.08) !important;
+}
+
+.ingredient-item:hover::before {
+  opacity: 1;
+}
+
+.selected-item {
+  border: 2px solid var(--primary-color) !important;
+  background-color: var(--primary-light) !important;
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.18) !important;
+}
+
+.selected-item::before {
+  opacity: 1 !important;
+}
+
+.selected-item .text-muted {
+  color: var(--primary-color) !important;
+}
+
+.substitute-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-left: 5px solid var(--primary-color) !important;
+  position: relative;
+}
+
+.substitute-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06) !important;
+}
+
+/* Emoji icon container — stays visible in high contrast */
+.ingredient-item span[style*="width: 60px"] {
+  flex-shrink: 0;
+}
+
+/* Alto contraste — seleção */
+body.high-contrast .selected-item {
+  border: 3px solid #ffff00 !important;
+  background-color: #1a1a00 !important;
+}
+
+body.high-contrast .ingredient-item:hover {
+  border-color: #00ff00 !important;
+}
+
+body.high-contrast .ingredient-item::before {
+  background: #ffff00 !important;
+}
+
+body.high-contrast .substitute-card {
+  border-left-color: #ffff00 !important;
+}
+
+/* Badge styling in high contrast */
+body.high-contrast .badge.bg-primary-light {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .badge.bg-warning {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 1px solid #ffffff !important;
+}

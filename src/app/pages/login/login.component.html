@@ -1,0 +1,239 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-80 my-5">
+  <div class="card glass-panel overflow-hidden w-100" style="max-width: 950px; border-radius: 20px;">
+    <div class="row g-0">
+      <!-- Coluna da Imagem -->
+      <div class="col-md-6 d-none d-md-block position-relative">
+        <img 
+          src="login_img.png" 
+          class="img-fluid h-100 w-100 object-fit-cover" 
+          alt="Ingredientes naturais e saudáveis"
+          style="min-height: 500px;">
+        <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-50 text-white text-center">
+          <h3 class="fw-bold m-0 text-white">Sabor & Nutrição</h3>
+          <p class="small m-0 text-white">Descubra alternativas perfeitas para suas receitas favoritas.</p>
+        </div>
+      </div>
+      
+      <!-- Coluna do Formulário -->
+      <div class="col-md-6 p-4 p-md-5 d-flex flex-column justify-content-center">
+        <div class="text-center mb-4">
+          <div class="fs-1 text-primary-color mb-2">
+            <i class="bi bi-egg-fried"></i>
+          </div>
+          <h2 class="fw-bold m-0 text-primary-color">
+            {{ mode === 'login' ? 'Bem-vindo(a)' : 'Criar Conta' }}
+          </h2>
+          <p class="text-muted">Substitutos Saudáveis de Cozinha</p>
+        </div>
+
+        <!-- Alternador Entrar / Cadastrar -->
+        <div class="btn-group w-100 mb-4" role="group" aria-label="Alternar entre entrar e cadastrar">
+          <button 
+            type="button" 
+            class="btn"
+            [class.btn-custom-primary]="mode === 'login'"
+            [class.btn-outline-secondary]="mode !== 'login'"
+            (click)="switchMode('login')">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+          </button>
+          <button 
+            type="button" 
+            class="btn"
+            [class.btn-custom-primary]="mode === 'register'"
+            [class.btn-outline-secondary]="mode !== 'register'"
+            (click)="switchMode('register')">
+            <i class="bi bi-person-plus me-1"></i>Cadastrar
+          </button>
+        </div>
+
+        <!-- ===================== FORMULÁRIO DE LOGIN ===================== -->
+        <form *ngIf="mode === 'login'" (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+          <div *ngIf="errorMessage" class="alert alert-danger p-2 fs-6 mb-3 text-center" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
+          </div>
+
+          <!-- Email / Usuário -->
+          <div class="mb-3">
+            <label for="username" class="form-label fw-semibold">E-mail</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+              <input 
+                type="email" 
+                class="form-control border-start-0" 
+                id="username" 
+                name="username" 
+                [(ngModel)]="username" 
+                placeholder="admin@email.com"
+                required
+                #userField="ngModel">
+            </div>
+          </div>
+
+          <!-- Senha -->
+          <div class="mb-4">
+            <label for="password" class="form-label fw-semibold">Senha</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-lock text-muted"></i></span>
+              <input 
+                type="password" 
+                class="form-control border-start-0" 
+                id="password" 
+                name="password" 
+                [(ngModel)]="password" 
+                placeholder="••••••"
+                required
+                #passField="ngModel">
+            </div>
+          </div>
+
+          <!-- LGPD Checkbox -->
+          <div class="card bg-light border-0 p-3 mb-4 rounded-3 lgpd-container">
+            <div class="form-check d-flex align-items-start">
+              <input 
+                class="form-check-input me-2 mt-1" 
+                type="checkbox" 
+                id="lgpdAccepted" 
+                name="lgpdAccepted" 
+                [(ngModel)]="lgpdAccepted"
+                required>
+              <label class="form-check-label small text-muted" for="lgpdAccepted">
+                <strong class="text-dark d-block mb-1">
+                  Consentimento de Dados (<a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer" class="text-primary-color text-decoration-underline" (click)="$event.stopPropagation()">LGPD</a>)
+                </strong>
+                Concordo com o processamento dos meus dados de navegação e preferências locais para personalização da experiência de acessibilidade e receitas.
+              </label>
+            </div>
+          </div>
+
+          <!-- Botão de Entrar -->
+          <button 
+            type="submit" 
+            class="btn btn-custom-primary w-100 py-2.5 fs-5 mt-2" 
+            [disabled]="!lgpdAccepted || !username.trim() || !password.trim()">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+          </button>
+
+          <p class="text-center text-muted small mt-3 mb-0">
+            Ainda não tem conta?
+            <a href="javascript:void(0)" class="text-primary-color fw-semibold text-decoration-underline" (click)="switchMode('register')">
+              Cadastre-se
+            </a>
+          </p>
+        </form>
+
+        <!-- ===================== FORMULÁRIO DE CADASTRO ===================== -->
+        <form *ngIf="mode === 'register'" (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
+          <div *ngIf="regErrorMessage" class="alert alert-danger p-2 fs-6 mb-3 text-center" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ regErrorMessage }}
+          </div>
+          <div *ngIf="regSuccessMessage" class="alert alert-success p-2 fs-6 mb-3 text-center" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> {{ regSuccessMessage }}
+          </div>
+
+          <!-- Nome -->
+          <div class="mb-3">
+            <label for="regName" class="form-label fw-semibold">Nome completo</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-person text-muted"></i></span>
+              <input 
+                type="text" 
+                class="form-control border-start-0" 
+                id="regName" 
+                name="regName" 
+                [(ngModel)]="regName" 
+                placeholder="Seu nome"
+                required
+                #regNameField="ngModel">
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="regEmail" class="form-label fw-semibold">E-mail</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+              <input 
+                type="email" 
+                class="form-control border-start-0" 
+                id="regEmail" 
+                name="regEmail" 
+                [(ngModel)]="regEmail" 
+                placeholder="seuemail@exemplo.com"
+                required
+                #regEmailField="ngModel">
+            </div>
+          </div>
+
+          <!-- Senha -->
+          <div class="mb-3">
+            <label for="regPassword" class="form-label fw-semibold">Senha</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-lock text-muted"></i></span>
+              <input 
+                type="password" 
+                class="form-control border-start-0" 
+                id="regPassword" 
+                name="regPassword" 
+                [(ngModel)]="regPassword" 
+                placeholder="Mínimo 6 caracteres"
+                required
+                minlength="6"
+                #regPasswordField="ngModel">
+            </div>
+          </div>
+
+          <!-- Confirmar Senha -->
+          <div class="mb-4">
+            <label for="regConfirmPassword" class="form-label fw-semibold">Confirmar senha</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-lock-fill text-muted"></i></span>
+              <input 
+                type="password" 
+                class="form-control border-start-0" 
+                id="regConfirmPassword" 
+                name="regConfirmPassword" 
+                [(ngModel)]="regConfirmPassword" 
+                placeholder="Repita a senha"
+                required
+                #regConfirmField="ngModel">
+            </div>
+          </div>
+
+          <!-- LGPD Checkbox -->
+          <div class="card bg-light border-0 p-3 mb-4 rounded-3 lgpd-container">
+            <div class="form-check d-flex align-items-start">
+              <input 
+                class="form-check-input me-2 mt-1" 
+                type="checkbox" 
+                id="regLgpdAccepted" 
+                name="regLgpdAccepted" 
+                [(ngModel)]="regLgpdAccepted"
+                required>
+              <label class="form-check-label small text-muted" for="regLgpdAccepted">
+                <strong class="text-dark d-block mb-1">
+                  Consentimento de Dados (<a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer" class="text-primary-color text-decoration-underline" (click)="$event.stopPropagation()">LGPD</a>)
+                </strong>
+                Concordo com o processamento dos meus dados para criação e gerenciamento da minha conta.
+              </label>
+            </div>
+          </div>
+
+          <!-- Botão de Cadastrar -->
+          <button 
+            type="submit" 
+            class="btn btn-custom-primary w-100 py-2.5 fs-5 mt-2" 
+            [disabled]="!regLgpdAccepted || !regName.trim() || !regEmail.trim() || !regPassword.trim() || !regConfirmPassword.trim()">
+            <i class="bi bi-person-plus me-2"></i>Cadastrar
+          </button>
+
+          <p class="text-center text-muted small mt-3 mb-0">
+            Já tem uma conta?
+            <a href="javascript:void(0)" class="text-primary-color fw-semibold text-decoration-underline" (click)="switchMode('login')">
+              Entrar
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

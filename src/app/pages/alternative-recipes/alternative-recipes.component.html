@@ -1,0 +1,129 @@
+<div class="container my-5">
+  <!-- Cabeçalho -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="glass-panel p-4 text-center text-md-start d-md-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h2 fw-bold text-primary-color m-0"><i class="bi bi-book-half me-2"></i>Receitas Alternativas</h1>
+          <p class="text-muted m-0 mt-1">Veja opções culinárias preparadas com os substitutos saudáveis sugeridos.</p>
+        </div>
+        <div class="mt-3 mt-md-0 d-flex gap-2 justify-content-center">
+          <a routerLink="/home" class="btn btn-custom-secondary btn-sm rounded-pill px-3">
+            <i class="bi bi-house-door me-1"></i>Início
+          </a>
+          <a routerLink="/recipes" class="btn btn-custom-primary btn-sm rounded-pill px-3">
+            <i class="bi bi-arrow-left-right me-1"></i>Substitutos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Coluna de Filtros e Lista de Receitas -->
+    <div class="col-lg-5">
+      <!-- Filtros por Categoria -->
+      <div class="card glass-panel p-4 mb-4 border-0">
+        <h2 class="h5 fw-bold mb-3"><i class="bi bi-filter-left me-1"></i>Categorias</h2>
+        <div class="d-flex flex-wrap gap-2">
+          <button 
+            *ngFor="let cat of categories" 
+            (click)="selectedCategory = cat"
+            class="btn btn-sm rounded-pill py-1 px-3 border"
+            [ngClass]="selectedCategory === cat ? 'btn-custom-primary border-0' : 'btn-light text-muted'">
+            {{ cat }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista de Receitas -->
+      <div class="recipe-list d-flex flex-column gap-3">
+        <div 
+          *ngFor="let rec of filteredRecipes"
+          (click)="selectRecipe(rec)"
+          class="card recipe-item glass-panel border-0 p-3"
+          [ngClass]="{'selected-item': selectedRecipe?.name === rec.name}"
+          role="button"
+          tabindex="0"
+          (keydown.enter)="selectRecipe(rec)">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h3 class="h5 fw-bold m-0">{{ rec.name }}</h3>
+              <div class="d-flex gap-2 mt-2 flex-wrap">
+                <span class="badge bg-primary-light text-primary-color">{{ rec.category }}</span>
+                <span class="badge bg-warning text-dark">Substituto: {{ rec.alternative }}</span>
+              </div>
+            </div>
+            <div class="text-muted">
+              <i class="bi bi-chevron-right fs-4"></i>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="filteredRecipes.length === 0" class="text-center py-5 glass-panel">
+          <i class="bi bi-journal-x text-muted display-4 mb-3 d-block"></i>
+          <p class="text-muted fw-semibold">Nenhuma receita encontrada para esta categoria.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel de Detalhes da Receita Selecionada -->
+    <div class="col-lg-7">
+      <div *ngIf="selectedRecipe" class="card glass-panel border-0 p-4 p-md-5 h-100">
+        <!-- Header da Receita -->
+        <div class="d-md-flex justify-content-between align-items-start border-bottom pb-4 mb-4">
+          <div>
+            <span class="badge bg-primary-light text-primary-color mb-1 fs-6">{{ selectedRecipe.category }}</span>
+            <h2 class="fw-bold m-0 text-primary-color">{{ selectedRecipe.name }}</h2>
+            <div class="d-flex align-items-center gap-4 mt-2 text-muted small">
+              <span><i class="bi bi-clock me-1 text-primary-color"></i>Preparo: <strong>{{ selectedRecipe.time }}</strong></span>
+              <span><i class="bi bi-arrow-left-right me-1 text-warning"></i>Substituto: <strong>{{ selectedRecipe.alternative }}</strong></span>
+            </div>
+          </div>
+
+          <!-- Controles de Leitura por Voz -->
+          <div class="d-flex gap-2 mt-3 mt-md-0">
+            <button 
+              (click)="speakRecipe()" 
+              class="btn btn-outline-success btn-sm rounded-pill px-3 py-2"
+              title="Ouvir receita por voz">
+              <i class="bi bi-volume-up-fill me-1"></i> Ouvir
+            </button>
+            <button 
+              (click)="stopVoice()" 
+              class="btn btn-outline-danger btn-sm rounded-pill px-3 py-2"
+              title="Parar leitura por voz">
+              <i class="bi bi-volume-mute-fill me-1"></i> Parar
+            </button>
+          </div>
+        </div>
+
+        <!-- Ingredientes -->
+        <div class="mb-4">
+          <h3 class="h5 fw-bold mb-3 text-dark"><i class="bi bi-egg-fill text-success me-2"></i>Ingredientes Necessários</h3>
+          <ul class="list-group list-group-flush border-0 bg-transparent">
+            <li *ngFor="let ing of selectedRecipe.ingredients" class="list-group-item bg-transparent border-0 px-0 py-2 d-flex align-items-start gap-2">
+              <i class="bi bi-circle-fill text-primary-color mt-2" style="font-size: 6px;"></i>
+              <span class="text-dark">{{ ing }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Modo de Preparo -->
+        <div>
+          <h3 class="h5 fw-bold mb-3 text-dark"><i class="bi bi-mortar-pestle text-success me-2"></i>Modo de Preparo</h3>
+          <ol class="list-group list-group-numbered list-group-flush border-0 bg-transparent">
+            <li *ngFor="let inst of selectedRecipe.instructions" class="list-group-item bg-transparent border-0 px-0 py-2.5 text-dark">
+              {{ inst }}
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div *ngIf="!selectedRecipe" class="card glass-panel border-0 p-5 text-center h-100 d-flex justify-content-center align-items-center">
+        <i class="bi bi-book text-muted display-4 mb-3 d-block"></i>
+        <p class="text-muted fs-5 fw-semibold">Selecione uma receita à esquerda para ver os detalhes completos de preparo.</p>
+      </div>
+    </div>
+  </div>
+</div>

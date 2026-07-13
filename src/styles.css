@@ -1,0 +1,372 @@
+/* Estilos globais e recursos de acessibilidade */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --primary-color: #2e7d32; /* Verde Cozinha */
+  --primary-dark: #1b5e20;
+  --primary-light: #e8f5e9;
+  --secondary-color: #e65100; /* Laranja Quente */
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border-radius: 16px;
+  --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --font-family: 'Outfit', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  min-height: 100vh;
+  transition: var(--transition);
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Modificadores de tamanho de fonte */
+body.font-size-sm { font-size: 0.9rem; }
+body.font-size-md { font-size: 1rem; }
+body.font-size-lg { font-size: 1.15rem; }
+body.font-size-xl { font-size: 1.3rem; }
+
+/* Modificadores específicos de elementos para escala de fonte */
+body.font-size-sm h1 { font-size: 2rem; }
+body.font-size-sm h2 { font-size: 1.5rem; }
+body.font-size-lg h1 { font-size: 3rem; }
+body.font-size-lg h2 { font-size: 2.2rem; }
+body.font-size-xl h1 { font-size: 3.5rem; }
+body.font-size-xl h2 { font-size: 2.5rem; }
+
+/* ===================================================
+   Modo de Alto Contraste - CORREÇÃO COMPLETA
+   Usa seletores específicos ao invés do :not() genérico
+   que quebrava emojis, imagens e componentes ao rolar.
+   =================================================== */
+body.high-contrast {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Textos e containers gerais */
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast div,
+body.high-contrast section,
+body.high-contrast main,
+body.high-contrast header,
+body.high-contrast footer,
+body.high-contrast nav,
+body.high-contrast ul,
+body.high-contrast ol,
+body.high-contrast li,
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast h5,
+body.high-contrast h6,
+body.high-contrast label,
+body.high-contrast td,
+body.high-contrast th,
+body.high-contrast tr,
+body.high-contrast table {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+}
+
+/* Cards, paineis e containers visuais */
+body.high-contrast .card,
+body.high-contrast .glass-panel,
+body.high-contrast .benefit-card,
+body.high-contrast .stat-card,
+body.high-contrast .ingredient-item,
+body.high-contrast .recipe-item,
+body.high-contrast .substitute-card,
+body.high-contrast .lgpd-container,
+body.high-contrast .navbar,
+body.high-contrast .navbar-collapse,
+body.high-contrast .dropdown-menu,
+body.high-contrast .modal-content,
+body.high-contrast .form-control,
+body.high-contrast .input-group-text,
+body.high-contrast .list-group-item,
+body.high-contrast .alert {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* Remove background-image e gradients que atrapalham */
+body.high-contrast .benefit-card::before,
+body.high-contrast .home-hero::before,
+body.high-contrast .home-hero::after {
+  display: none !important;
+}
+
+/* Remover backdrop-filter que pode causar problemas */
+body.high-contrast .glass-panel,
+body.high-contrast .benefit-card,
+body.high-contrast .stat-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Bordas visíveis para cards e paineis */
+body.high-contrast .card,
+body.high-contrast .glass-panel,
+body.high-contrast .benefit-card,
+body.high-contrast .stat-card {
+  border: 2px solid #ffffff !important;
+}
+
+/* Botões primários - Amarelo no preto para destaque máximo */
+body.high-contrast .btn-primary,
+body.high-contrast .btn-custom-primary,
+body.high-contrast .btn-hero-primary,
+body.high-contrast .badge {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  font-weight: bold;
+  background-image: none !important;
+}
+
+/* Botões secundários e outline */
+body.high-contrast .btn-outline-primary,
+body.high-contrast .btn-outline-secondary,
+body.high-contrast .btn-secondary,
+body.high-contrast .btn-custom-secondary,
+body.high-contrast .btn-hero-secondary,
+body.high-contrast .btn-outline-success,
+body.high-contrast .btn-outline-danger {
+  background-color: #000000 !important;
+  color: #00ff00 !important; /* Verde neon */
+  border: 2px solid #00ff00 !important;
+  background-image: none !important;
+}
+
+/* Links */
+body.high-contrast a {
+  color: #00ffff !important; /* Ciano para links */
+  text-decoration: underline !important;
+}
+
+/* Textos que usam .text-muted, .text-light etc */
+body.high-contrast .text-muted,
+body.high-contrast .text-light,
+body.high-contrast .text-secondary,
+body.high-contrast .hero-subtitle,
+body.high-contrast .section-subtitle,
+body.high-contrast .cta-subtitle,
+body.high-contrast .stat-label {
+  color: #cccccc !important;
+}
+
+/* Textos coloridos com gradientes - forçar branco */
+body.high-contrast .hero-username,
+body.high-contrast .stat-number,
+body.high-contrast .text-primary-color {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #ffff00 !important;
+  color: #ffff00 !important;
+}
+
+/* Icones de benefícios */
+body.high-contrast .benefit-icon-wrapper,
+body.high-contrast .hero-icon-wrapper {
+  background: #000000 !important;
+  border: 2px solid #ffff00 !important;
+  color: #ffff00 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Imagens NÃO devem ser afetadas (corrige sumiço de emojis/imgs) */
+body.high-contrast img {
+  /* Imagens mantêm sua aparência original */
+  background-color: transparent !important;
+}
+
+/* Carousel specific */
+body.high-contrast .carousel-caption-custom {
+  background: rgba(0,0,0,0.9) !important;
+}
+
+body.high-contrast .carousel-caption-custom h3,
+body.high-contrast .carousel-caption-custom p {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+/* Indicadores do carousel */
+body.high-contrast .carousel-indicators [data-bs-target] {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Barra de acessibilidade - manter escura */
+body.high-contrast .bg-dark {
+  background-color: #111111 !important;
+}
+
+/* Input styling */
+body.high-contrast input,
+body.high-contrast select,
+body.high-contrast textarea {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Selected items - Amarelo destaque */
+body.high-contrast .selected-item {
+  border: 3px solid #ffff00 !important;
+  background-color: #1a1a00 !important;
+}
+
+/* Footer */
+body.high-contrast footer {
+  background-color: #111111 !important;
+}
+
+body.high-contrast footer a {
+  color: #00ffff !important;
+}
+
+/* Navbar */
+body.high-contrast .navbar-brand,
+body.high-contrast .nav-link {
+  color: #ffffff !important;
+}
+
+body.high-contrast .nav-link.active {
+  color: #ffff00 !important;
+  border-bottom-color: #ffff00 !important;
+}
+
+/* Efeitos de Glassmorphism Premium */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.glass-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Botões Customizados */
+.btn-custom-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+}
+
+.btn-custom-primary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+}
+
+.btn-custom-primary:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-custom-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-custom-secondary:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Estilo para cartões de ingredientes e receitas */
+.recipe-card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.recipe-card:hover {
+  transform: scale(1.02);
+}
+
+/* Utilitários */
+.text-primary-color {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary-light {
+  background-color: var(--primary-light) !important;
+}
+
+/* Efeitos de foco acessíveis (apenas navegação por teclado) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--secondary-color) !important;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-color), #66bb6a);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Selection color */
+::selection {
+  background: var(--primary-color);
+  color: #ffffff;
+}

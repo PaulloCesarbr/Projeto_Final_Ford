@@ -1,0 +1,87 @@
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link.active {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), #66bb6a);
+  border-radius: 3px;
+}
+
+.nav-link:hover:not(.active) {
+  color: var(--primary-color) !important;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+/* Accessibility bar — ~25% mais compacta */
+.accessibility-bar {
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+/* Navbar — ~25% mais compacta (py-3 → equivalente a py-2) */
+.navbar-compact {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.navbar-compact .navbar-brand {
+  font-size: 1.05rem;
+}
+
+.navbar-compact .nav-link {
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+/* Rodapé — ~33% mais compacto (py-4 → py-2.5) */
+.footer-compact {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.footer-compact .footer-title {
+  font-size: 0.9rem;
+}
+
+.footer-compact .footer-subtitle {
+  font-size: 0.75rem;
+}
+
+/* Footer link hover */
+footer a {
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  opacity: 1 !important;
+  transform: translateY(-2px);
+}
+
+/* Navbar brand animation */
+.navbar-brand i {
+  transition: transform 0.4s ease;
+}
+
+.navbar-brand:hover i {
+  transform: rotate(15deg) scale(1.1);
+}

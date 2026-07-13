@@ -1,0 +1,8 @@
+.lgpd-container {
+  transition: border-color 0.3s ease;
+  border: 1px solid transparent !important;
+}
+
+.lgpd-container:hover {
+  border-color: var(--primary-color) !important;
+}
